@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # import
-import random
+import random, time
 
 # function to  interact wtih user
 def interact (mynum):
@@ -20,6 +20,7 @@ ranges = range (minN, maxN)
 
 # tell user to have a number!
 print ('Please have a number between {0} and {1} in your head.'.format (minN, maxN-1))
+time.sleep (5)
 
 # guess
 ntrials = 0.
@@ -35,15 +36,16 @@ while not correct:
     if correct: break
     
     # figure out a list to check
-    head = 0 if is_smaller else mynum
-    tail = mynum if is_smaller else None
-    print ('head, tail: {0}, {1}'.format (head, tail))
+    index = ranges.index (mynum)
+    head = 0 if is_smaller else index
+    tail = index if is_smaller else None
 
     # new range list
-    head, tail = max (minN, head), min (maxN, tail)
+    head = max (minN, head)
+    tail = None if tail==None else min (maxN, tail)
     ranges = ranges[head:tail]
-    print ('new range: {0}'.format (ranges))
 
+print ('I got it in {0} trials. Not too bad hah!'.format (int (ntrials)))
 print ('Bye :)')
     
     
